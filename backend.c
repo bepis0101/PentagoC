@@ -107,7 +107,6 @@ plansza* rewrite_b(plansza P[], int** tab)
     return P;
 }
 
-void PRINT_arr(int** tab, int length, int height)
 {
     putchar('\n');
     for(int y = 0; y < height; y++)
@@ -118,105 +117,6 @@ void PRINT_arr(int** tab, int length, int height)
         }
         putchar('\n');
     }
-}
-
-int** black_round(int** board, plansza P[])
-{
-    // PRINT_arr(board, 6, 6);
-    printf("\nPodaj koordynaty gdzie chcesz polozyc czarna kulke. Instrukcja podawania koordynatow jest we wczesniej wymienionym pliku\n");
-    char x, y;
-    y = getchar();
-    x = getchar();
-    while( !(x <= '6' && x >= '1' && ( (y >= 'A' && y <= 'F') || (y >= 'a' && y <= 'f') )) )
-    {
-        printf("\nNiepoprawne wejscie, zasiegnij pomocy instrukcji i sprobuj jeszcze raz\n");
-        y = getchar();
-        x = getchar();
-    }
-    int i = x-'1';
-    y = zamien(y);
-    int j = y-'A';
-    while(check(board, i, j) == 0)
-    {
-        printf("\nWybrane miejsce jest juz zajete. Podaj inne koordynaty: ");
-        y = getchar();
-        x = getchar();
-        while(!(x <= '6' && x >= '1' && y >= 'A' && y <= 'F'))
-        {
-            printf("\nNiepoprawne wejscie, zasiegnij pomocy instrukcji i sprobuj jeszcze raz\n");
-            y = getchar();
-            x = getchar();
-        }
-        i = x-'1';
-        y = zamien(y);
-        j = y-'A';
-    }
-    board = k_czarnych(board, i, j);
-    PRINT_arr(board, 6, 6);
-    P = rewrite_b(P, board);
-    char turn;
-    printf("\nTeraz wybierz ktora plansze chcesz obrocic oraz w ktora strone (patrz instrukcja)\n");
-    int k; scanf("%d%c", &k, &turn);
-    k--;
-    if(turn == 'l' || turn == 'L')
-    {
-        P[k] = obrot_l(P[k]);
-    }
-    else
-    {
-        P[k] = obrot_r(P[k]);
-    }
-    board = rewrite(P, board);
-    PRINT_arr(board, 6, 6);
-    return board;
-}
-int** white_round(int** board, plansza P[])
-{
-
-    printf("\nPodaj koordynaty gdzie chcesz polozyc biala kulke. Instrukcja podawania koordynatow jest we wczesniej wymienionym pliku\n");
-    char x, y;
-    y = getchar();
-    x = getchar();
-    while(!(x <= '6' && x >= '1' && y >= 'A' && y <= 'F'))
-    {
-        printf("\nNiepoprawne wejscie, zasiegnij pomocy instrukcji i sprobuj jeszcze raz");
-        y = getchar();
-        x = getchar();
-    }
-    int i = x-'1';
-    int j = y-'A';
-    while(check(board, i, j) == 0)
-    {
-        printf("\nWybrane miejsce jest juz zajete. Podaj inne koordynaty:");
-        y = getchar();
-        x = getchar();
-        while(!(x <= '6' && x >= '1' && y >= 'A' && y <= 'F'))
-        {
-            printf("\nNiepoprawne wejscie, zasiegnij pomocy instrukcji i sprobuj jeszcze raz");
-            y = getchar();
-            x = getchar();
-        }
-        i = x-'1';
-        j = y-'A';
-    }
-    board = k_bialych(board, i, j);
-    PRINT_arr(board, 6, 6);
-    P = rewrite_b(P, board);
-    char turn;
-    printf("\nTeraz wybierz ktora plansze chcesz obrocic oraz w ktora strone (patrz instrukcja)\n");
-    int k; scanf("%d%c", &k, &turn);
-    k--;
-    if(turn == 'l' || turn == 'L')
-    {
-        P[k] = obrot_l(P[k]);
-    }
-    else
-    {
-        P[k] = obrot_r(P[k]);
-    }
-    board = rewrite(P, board);
-    PRINT_arr(board, 6, 6);
-    return board;
 }
 
 int check_vertical(int** board)
