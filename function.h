@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ncurses.h>
+#include <limits.h>
 #include "player.h"
+#include "bot.h"
 
 typedef struct plansza
 {
@@ -58,3 +60,5 @@ int** turn_the_board(int** board, plansza bP[], WINDOW* W, player P);
 int** O_round_move(int** board, plansza bP[], WINDOW* W, player P);
 
 int random_generator(int min, int max);
+
+int** create_matrix(int** board);

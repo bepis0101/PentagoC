@@ -107,18 +107,6 @@ plansza* rewrite_b(plansza P[], int** tab)
     return P;
 }
 
-{
-    putchar('\n');
-    for(int y = 0; y < height; y++)
-    {
-        for(int x = 0; x < length; x++)
-        {
-            printf("%3d", tab[x][y]);
-        }
-        putchar('\n');
-    }
-}
-
 int check_vertical(int** board)
 {
     for(int i = 0; i < 6; i++)
@@ -375,4 +363,19 @@ int koniec(int** board)
         return 3;
     }
     return 0;
+}
+
+int** create_matrix(int** board)
+{
+    int** temp = (int**)malloc(6*sizeof(int*));
+    for(int i = 0; i < 6; i++) temp[i] = (int*)malloc(6*sizeof(int));
+
+    for(int i = 0; i < 6; i++)
+    {
+        for(int j = 0; j < 6; j++)
+        {
+            temp[i][j] = board[i][j];
+        }
+    }
+    return temp;
 }
