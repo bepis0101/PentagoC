@@ -522,12 +522,23 @@ void gameplay_single()
         }
         if(koniec(board) == 0)
         {
-            int x = random_generator(0, 5), y = random_generator(0, 5);
+            int x, y;
+            // if(which_round <= 4)
+            // {
+            x = random_generator(0, 5); 
+            y = random_generator(0, 5);
             while(!check(board, x, y))
             {
                 x = random_generator(0, 5);
                 y = random_generator(0, 5);
             }
+            // }
+            /*else
+            {
+                pair p; p = best_move(board);
+                x = p.x;
+                y = p.y;
+            }*/
             board = k_bialych(board, x, y);
             werase(boardd);
             wrefresh(boardd);

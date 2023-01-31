@@ -81,7 +81,7 @@ int minimax(int** board, int depth, int isMaximizing)
 
 pair best_move(int** board)
 {
-    int bestscore = INT_MIN;
+    int bestscore = INT_MAX;
     pair move;
     int** temp = create_matrix(board);
     for(int i = 0; i < 6; i++)
@@ -93,7 +93,7 @@ pair best_move(int** board)
                 temp[i][j] = 2;
                 int score = minimax(temp, 0, 0);
                 temp[i][j] = 0;
-                if(score > bestscore)
+                if(score < bestscore)
                 {
                     score = bestscore;
                     move.x = i;
