@@ -42,7 +42,7 @@ int menu()
     }
 }
 
-void printw_borders(WINDOW* W)
+void printw_borders(WINDOW* W, int which_round)
 {
     box(W, 0, 0);
     for(int i = 1; i < getmaxx(W)-1; i++)
@@ -55,6 +55,12 @@ void printw_borders(WINDOW* W)
     }
     mvwprintw(W, 10, 20, "+");
     wrefresh(W);
+    if(which_round <= 3)
+    {
+        mvprintw(22, (getmaxx(stdscr)/2)-25, "Po planszy poruszaj sie strzalkami na klawiaturze");
+        mvprintw(23, (getmaxx(stdscr)/2)-14, "Wybory zatwierdzaj Enterem.");
+        refresh();
+    }
 }
 void printw_arr(int** board, WINDOW* W)
 {
@@ -316,7 +322,8 @@ void gameplay_multi()
     int Xmax, Ymax; getmaxyx(stdscr, Ymax, Xmax);
     WINDOW* boardd = newwin(20, 40, (Ymax/2)-10, (Xmax/2)-20);
     keypad(boardd, 1);
-    printw_borders(boardd);
+    int which_round = 1;
+    printw_borders(boardd, which_round);
     printw_arr(board, boardd);
     refresh();
     player P;
@@ -328,14 +335,14 @@ void gameplay_multi()
             board = X_round_move(board, board_s, boardd, P);
             werase(boardd);
             wrefresh(boardd);
-            printw_borders(boardd);
+            printw_borders(boardd, which_round);
             printw_arr(board, boardd);
             wrefresh(boardd);
             refresh();
             board = turn_the_board(board, board_s, boardd, P);
             werase(boardd);
             wrefresh(boardd);
-            printw_borders(boardd);
+            printw_borders(boardd, which_round);
             printw_arr(board, boardd);
             wrefresh(boardd);
             refresh();
@@ -382,17 +389,18 @@ void gameplay_multi()
             board = O_round_move(board, board_s, boardd, P);
             werase(boardd);
             wrefresh(boardd);
-            printw_borders(boardd);
+            printw_borders(boardd, which_round);
             printw_arr(board, boardd);
             wrefresh(boardd);
             refresh();
             board = turn_the_board(board, board_s, boardd, P);
             werase(boardd);
             wrefresh(boardd);
-            printw_borders(boardd);
+            printw_borders(boardd, which_round);
             printw_arr(board, boardd);
             wrefresh(boardd);
             refresh();
+            which_round++;
         }
         else
         {
@@ -450,7 +458,8 @@ void gameplay_single()
     int Xmax, Ymax; getmaxyx(stdscr, Ymax, Xmax);
     WINDOW* boardd = newwin(20, 40, (Ymax/2)-10, (Xmax/2)-20);
     keypad(boardd, 1);
-    printw_borders(boardd);
+    int which_round = 1;
+    printw_borders(boardd, which_round);
     printw_arr(board, boardd);
     refresh();
     player P;
@@ -462,14 +471,14 @@ void gameplay_single()
             board = X_round_move(board, board_s, boardd, P);
             werase(boardd);
             wrefresh(boardd);
-            printw_borders(boardd);
+            printw_borders(boardd, which_round);
             printw_arr(board, boardd);
             wrefresh(boardd);
             refresh();
             board = turn_the_board(board, board_s, boardd, P);
             werase(boardd);
             wrefresh(boardd);
-            printw_borders(boardd);
+            printw_borders(boardd, which_round);
             printw_arr(board, boardd);
             wrefresh(boardd);
             refresh();
@@ -522,7 +531,7 @@ void gameplay_single()
             board = k_bialych(board, x, y);
             werase(boardd);
             wrefresh(boardd);
-            printw_borders(boardd);
+            printw_borders(boardd, which_round);
             printw_arr(board, boardd);
             wrefresh(boardd);
             refresh();
@@ -540,10 +549,11 @@ void gameplay_single()
             board = rewrite(board_s, board);
             werase(boardd);
             wrefresh(boardd);
-            printw_borders(boardd);
+            printw_borders(boardd, which_round);
             printw_arr(board, boardd);
             wrefresh(boardd);
             refresh();
+            which_round++;
         }
         else
         {

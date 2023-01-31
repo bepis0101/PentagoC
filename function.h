@@ -19,7 +19,7 @@ int menu();
 
 void printw_arr(int** board, WINDOW* W);
 
-void printw_borders(WINDOW* W);
+void printw_borders(WINDOW* W, int which_round);
 
 plansza pusta(plansza x); // wypelnienie planszy zerami
 
