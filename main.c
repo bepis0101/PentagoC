@@ -3,6 +3,7 @@
 int main()
 {
     initscr();
+    start_color();
     int menu_choice = menu();
     if(menu_choice == 0)
     {

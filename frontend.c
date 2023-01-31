@@ -61,17 +61,47 @@ void printw_borders(WINDOW* W, int which_round)
         mvprintw(23, (getmaxx(stdscr)/2)-14, "Wybory zatwierdzaj Enterem.");
         refresh();
     }
+    else
+    {
+        int x = (getmaxx(stdscr)/2)-25;
+        int y = 22;
+        for(int i = 0; i <= 50; i++)
+        {
+            mvprintw(y, x+i, " ");
+        }
+        x = (getmaxx(stdscr)/2)-14;
+        y++;
+        for(int i = 0; i <= 28; i++)
+        {
+            mvprintw(y, x+i, " ");
+        }
+    }
 }
 void printw_arr(int** board, WINDOW* W)
 {
+    init_pair(1, COLOR_GREEN, COLOR_BLACK);
+    init_pair(2, COLOR_RED, COLOR_BLACK);
     int x = 5, y = 2;
     for(int i = 0; i < 6; i++)
     {
         for(int j = 0; j < 6; j++)
         {
-            if(board[j][i] == 0) mvwprintw(W, y, x, "%c", '.');
-            if(board[j][i] == 1) mvwprintw(W, y, x, "%c", 'X');
-            if(board[j][i] == 2) mvwprintw(W, y, x, "%c", 'O');
+            if(board[j][i] == 0)
+            { 
+                mvwprintw(W, y, x, "%c", '.');
+            }
+            if(board[j][i] == 1)
+            {
+                wattron(W, COLOR_PAIR(1));
+                mvwprintw(W, y, x, "%c", 'X');
+                wattroff(W, COLOR_PAIR(1));
+            }
+            if(board[j][i] == 2)
+            {
+                wattron(W, COLOR_PAIR(2));
+                mvwprintw(W, y, x, "%c", 'O');
+                wattroff(W, COLOR_PAIR(2));
+            }
             x += 6;
         }
         x = 5;
