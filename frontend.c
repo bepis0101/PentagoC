@@ -57,14 +57,14 @@ void printw_borders(WINDOW* W, int which_round)
     wrefresh(W);
     if(which_round <= 3)
     {
-        mvprintw(22, (getmaxx(stdscr)/2)-25, "Po planszy poruszaj sie strzalkami na klawiaturze");
-        mvprintw(23, (getmaxx(stdscr)/2)-14, "Wybory zatwierdzaj Enterem.");
+        mvprintw(getmaxy(stdscr)-2, (getmaxx(stdscr)/2)-25, "Po planszy poruszaj sie strzalkami na klawiaturze");
+        mvprintw(getmaxy(stdscr)-1, (getmaxx(stdscr)/2)-14, "Wybory zatwierdzaj Enterem.");
         refresh();
     }
     else
     {
         int x = (getmaxx(stdscr)/2)-25;
-        int y = 22;
+        int y = getmaxy(stdscr)-2;
         for(int i = 0; i <= 50; i++)
         {
             mvprintw(y, x+i, " ");
